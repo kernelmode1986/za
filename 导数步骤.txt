@@ -1,0 +1,24 @@
+1.把excel导出到txt文件fangxin_whiltelist_20180323-v2.txt
+
+2.汉字符转码
+iconv  -f GB18030  -t UTF-8 fangxin_whiltelist_20180323-v2.txt  -o fangxin_whiltelist_20180323-v2_utf8.txt
+
+3.建表
+drop table fangxin_whitelist_201712;
+
+create table fangxin_whitelist_201712(
+NSRSBH varchar(20),
+NSRDZDAH varchar(20),
+NSRMC varchar(200),
+sale_pred double,
+growth_pred double,
+customer_pred double, 
+compete_pred double,
+pred double,
+level varchar(5)
+)
+row format delimited fields terminated by '\t'
+tblproperties ("skip.header.line.count"="1");
+
+4.导数
+load data local inpath 'fangxin_whiltelist_20180323-v2_utf8.txt'  into table fangxin_whitelist_201712;
